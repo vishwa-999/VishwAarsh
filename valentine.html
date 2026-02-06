@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for Aarsh</title>
+    <style>
+        body { background-color: #fff0f3; font-family: 'Poppins', sans-serif; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100vh; overflow: hidden; margin: 0; padding: 20px; }
+        h1 { color: #ff4d6d; font-size: 1.8rem; min-height: 120px; transition: 0.5s; padding: 0 10px; }
+        .buttons-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; position: relative; min-height: 200px; align-items: center; }
+        .btn { padding: 12px 25px; font-size: 1rem; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; touch-action: none; }
+        .correct { background-color: #ff4d6d; color: white; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3); }
+        .wrong { background-color: #adb5bd; color: white; opacity: 0.8; }
+        #festival-list { display: none; list-style: none; padding: 0; color: #d81b60; font-weight: bold; line-height: 2.2; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <div id="game-box">
+        <h1 id="question">In the whole universe, who do you trust the most and share everything with?</h1>
+        <div id="button-area" class="buttons-container">
+            <button class="btn wrong" onmouseover="fade(this)">Mom & Dad</button>
+            <button class="btn wrong" onmouseover="fade(this)">Friends</button>
+            <button class="btn correct" onclick="nextStep(2)">My Vishwa ❤️</button>
+            <button class="btn wrong" onmouseover="fade(this)">Siblings</button>
+        </div>
+        <ul id="festival-list">
+            <li>🌹 Rose Day</li>
+            <li>💍 Propose Day</li>
+            <li>🍫 Chocolate Day</li>
+            <li>🧸 Teddy Day</li>
+            <li>🤝 Promise Day</li>
+            <li>🤗 Hug Day</li>
+            <li>💋 Kiss Day</li>
+            <li style="font-size: 1.5rem; margin-top: 10px;">❤️ Valentine's Day ❤️</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function fade(el) { el.style.opacity = '0.1'; el.style.transform = 'scale(0.5)'; }
+
+        function nextStep(step) {
+            const q = document.getElementById('question');
+            const area = document.getElementById('button-area');
+
+            if (step === 2) {
+                q.innerText = "Who is the 'Crown' to your 'Root'? (The only one who makes your life complete?)";
+                area.innerHTML = `
+                    <button class="btn wrong" onmouseover="fade(this)">A Shiny New Drill</button>
+                    <button class="btn correct" onclick="nextStep(3)">My Vishwa ❤️</button>
+                    <button class="btn wrong" onmouseover="fade(this)">Dentistry</button>
+                `;
+            } 
+            else if (step === 3) {
+                q.innerText = "Will you be mine forever and celebrate every festival of love with me?";
+                area.innerHTML = `
+                    <button class="btn correct" onclick="nextStep(4)">YES, FOREVER! ❤️</button>
+                    <button id="noBtn" class="btn wrong" onmouseover="moveBtn()" ontouchstart="moveBtn()">No</button>
+                `;
+            }
+            else if (step === 4) {
+                q.innerHTML = "From our very first meeting to all the lives ahead... <br> Every day is a celebration with you!";
+                area.style.display = "none";
+                document.getElementById('festival-list').style.display = "block";
+                celebrate();
+            }
+        }
+
+        function moveBtn() {
+            const btn = document.getElementById('noBtn');
+            btn.style.position = 'fixed';
+            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+        }
+
+        function celebrate() {
+            var end = Date.now() + (15 * 1000);
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ff758f'] });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ff758f'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+    </script>
+</body>
+</html>

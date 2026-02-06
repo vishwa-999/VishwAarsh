@@ -3,88 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Message for Aarsh</title>
+    <title>A Gift for Aarsh</title>
     <style>
-        body { background-color: #fff0f3; font-family: 'Poppins', sans-serif; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100vh; overflow: hidden; margin: 0; padding: 20px; }
-        h1 { color: #ff4d6d; font-size: 2rem; min-height: 100px; transition: 0.5s; }
-        .buttons-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; position: relative; min-height: 200px; }
-        .btn { padding: 12px 25px; font-size: 1rem; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
-        .correct { background-color: #ff4d6d; color: white; }
-        .wrong { background-color: #adb5bd; color: white; opacity: 0.6; }
-        .wrong:hover { transform: scale(0.8); opacity: 0.3; }
-        #festival-list { display: none; list-style: none; padding: 0; color: #d81b60; font-weight: bold; line-height: 2; }
+        body { 
+            background: #1a1a1a; 
+            color: white; 
+            font-family: 'Poppins', sans-serif; 
+            text-align: center; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            margin: 0; 
+        }
+        .door-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            margin-top: 30px; 
+            flex-wrap: wrap; 
+        }
+        .door { 
+            width: 140px; 
+            height: 180px; 
+            background: #d81b60; 
+            border: 4px solid #ff4081; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 50px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            text-decoration: none; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        /* Valentine Door Styling */
+        .door.valentine:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 0 30px #ff4081; 
+        }
+        /* Birthday Door Styling */
+        .door.birthday { 
+            background: #3f51b5; 
+            border-color: #7986cb; 
+        }
+        .door.birthday:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 0 30px #7986cb; 
+        }
+        h1 { font-weight: 300; letter-spacing: 2px; padding: 0 20px; color: #ffeb3b; }
+        p { color: #888; margin-bottom: 20px; }
+        .label { margin-top: 10px; font-size: 0.9rem; color: #ccc; }
     </style>
 </head>
 <body>
-    <div id="game-box">
-        <h1 id="question">Who do you trust the most in this whole universe?</h1>
-        <div id="button-area" class="buttons-container">
-            <button class="btn wrong">Friends</button>
-            <button class="btn wrong">Cousins</button>
-            <button class="btn correct" onclick="nextStep(2)">Vishwa (Obv! ❤️)</button>
-            <button class="btn wrong">Siblings</button>
+    <h1>For Aarsh's Eyes Only</h1>
+    <p>Tap a door to start the journey...</p>
+    
+    <div class="door-container">
+        <div>
+            <a href="valentine.html" class="door valentine">❤️</a>
+            <div class="label">Valentine's</div>
         </div>
-        <ul id="festival-list">
-            <li>🌹 Rose Day</li>
-            <li>💍 Propose Day</li>
-            <li>🍫 Chocolate Day</li>
-            <li>🧸 Teddy Day</li>
-            <li>🤝 Promise Day</li>
-            <li>🤗 Hug Day</li>
-            <li>💋 Kiss Day</li>
-        </ul>
+        
+        <div>
+            <a href="birthday.html" class="door birthday">🎂</a>
+            <div class="label">Birthday</div>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        let currentStep = 1;
-
-        function nextStep(step) {
-            const q = document.getElementById('question');
-            const area = document.getElementById('button-area');
-
-            if (step === 2) {
-                q.innerText = "Who is the 'Crown' to your 'Root'? (The one who truly fills your life?)";
-                area.innerHTML = `
-                    <button class="btn wrong">My Dentist</button>
-                    <button class="btn correct" onclick="nextStep(3)">My Vishwa ❤️</button>
-                    <button class="btn wrong">A Shiny New Drill</button>
-                `;
-            } 
-            else if (step === 3) {
-                q.innerText = "Will you be mine forever and celebrate every single day with me?";
-                area.innerHTML = `
-                    <button class="btn correct" onclick="nextStep(4)">YES, FOREVER! ❤️</button>
-                    <button id="noBtn" class="btn wrong" onmouseover="moveBtn()" ontouchstart="moveBtn()">No</button>
-                `;
-            }
-            else if (step === 4) {
-                q.innerHTML = "From our first meeting to a lifetime ahead... <br> Let's celebrate every festival of love!";
-                area.style.display = "none";
-                document.getElementById('festival-list').style.display = "block";
-                
-                // Final Celebration
-                celebrate();
-            }
-        }
-
-        function moveBtn() {
-            const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-        }
-
-        function celebrate() {
-            var end = Date.now() + (15 * 1000);
-            (function frame() {
-                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ff758f'] });
-                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ff758f'] });
-                if (Date.now() < end) { requestAnimationFrame(frame); }
-            }());
-        }
-    </script>
 </body>
 </html>
