@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Gift for Aarsh</title>
+    <style>
+        body { background: #1a1a1a; color: white; font-family: 'Poppins', sans-serif; text-align: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; margin: 0; }
+        .door-container { display: flex; justify-content: center; gap: 30px; margin-top: 30px; }
+        .door { width: 150px; height: 200px; background: #d81b60; border: 4px solid #ff4081; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 50px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; }
+        .door:hover { transform: scale(1.1); box-shadow: 0 0 20px #ff4081; }
+        .door.birthday { background: #3f51b5; border-color: #7986cb; }
+        .door.birthday:hover { box-shadow: 0 0 20px #7986cb; }
+        h1 { font-weight: 300; letter-spacing: 2px; }
+        p { color: #888; }
+    </style>
+</head>
+<body>
+    <h1>For Aarsh's Eyes Only</h1>
+    <p>Choose a door to begin...</p>
+    
+    <div class="door-container">
+        <a href="valentine.html" class="door">❤️</a>
+        
+        <a href="birthday.html" class="door birthday">🎂</a>
+    </div>
+</body>
+</html>
